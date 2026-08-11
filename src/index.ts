@@ -55,10 +55,12 @@ export default {
             confirmed: !settings.email_confirmation,
           });
 
-        const sanitizedUser = await strapi
-          .plugin('users-permissions')
-          .service('user')
-          .sanitizeOutput(newUser, ctx);
+        const {
+  password: _removedPassword,
+  resetPasswordToken,
+  confirmationToken,
+  ...sanitizedUser
+} = newUser as any;
 
         if (settings.email_confirmation) {
           await strapi.plugin('users-permissions').service('user').sendConfirmationEmail(sanitizedUser);
