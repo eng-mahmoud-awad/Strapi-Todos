@@ -4,6 +4,7 @@ export default {
   register(/* { strapi }: { strapi: Core.Strapi } */) {},
 
   bootstrap({ strapi }: { strapi: Core.Strapi }) {
+     console.log('✅ CUSTOM BOOTSTRAP IS RUNNING');
     const authController = strapi.plugin('users-permissions').controller('auth');
 
     authController.register = async (ctx: any) => {
